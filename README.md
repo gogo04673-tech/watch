@@ -1,6 +1,7 @@
 # watch
 
 A new Flutter project.
+I will learn bloc cubit in this is project and learn a more of things about flutter. 
 
 ## Getting Started
 
