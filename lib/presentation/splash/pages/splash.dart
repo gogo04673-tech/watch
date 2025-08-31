@@ -15,7 +15,6 @@ class SplashPage extends StatelessWidget {
       body: BlocListener<SplashCubit, SplashState>(
         listener: (context, state) {
           if (state is Authenticated) {
-            print(MediaQuery.heightOf(context));
             AppNavigation.pushReplacementNamed(context, AppRoutes.homePage);
           }
 

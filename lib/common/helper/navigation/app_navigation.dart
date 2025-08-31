@@ -5,7 +5,7 @@ class AppNavigation {
     Navigator.of(context).pushReplacementNamed(route);
   }
 
-  static void push(BuildContext context, String route) {
+  static void pushNamed(BuildContext context, String route) {
     Navigator.of(context).pushNamed(route);
   }
 

@@ -5,13 +5,14 @@ import 'package:watch/common/helper/messages/display_message.dart';
 import 'package:watch/common/helper/navigation/app_navigation.dart';
 import 'package:watch/core/configs/routes/app_routes.dart';
 import 'package:watch/core/configs/theme/app_colors.dart';
-import 'package:watch/data/models/auth/signin_req_params.dart';
-import 'package:watch/domain/auth/usecases/signin.dart';
+import 'package:watch/data/models/auth/signup_req_params.dart';
+import 'package:watch/domain/auth/usecases/signup.dart';
 import 'package:watch/service_locator.dart';
 
-class SigninPage extends StatelessWidget {
-  SigninPage({super.key});
+class SignupPage extends StatelessWidget {
+  SignupPage({super.key});
 
+  final TextEditingController _nameCon = TextEditingController();
   final TextEditingController _emailCon = TextEditingController();
   final TextEditingController _passwordCon = TextEditingController();
 
@@ -20,41 +21,56 @@ class SigninPage extends StatelessWidget {
     return Scaffold(
       body: SafeArea(
         minimum: const EdgeInsets.only(top: 100, right: 16, left: 16),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.start,
-          crossAxisAlignment: CrossAxisAlignment.center,
+        child: ListView(
           children: [
-            _signinText(),
+            Column(
+              mainAxisAlignment: MainAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                _signupText(),
+                const SizedBox(height: 30),
 
-            const SizedBox(height: 30),
+                _usernameTextField(),
 
-            _emailTextField(),
+                const SizedBox(height: 20),
 
-            const SizedBox(height: 20),
+                _emailTextField(),
 
-            _passwordTextField(),
+                const SizedBox(height: 20),
 
-            const SizedBox(height: 60),
+                _passwordTextField(),
 
-            _signinButton(context),
+                const SizedBox(height: 60),
 
-            const SizedBox(height: 20),
+                _signupButton(context),
 
-            _signupText(context),
+                const SizedBox(height: 10),
+
+                _signinText(context),
+              ],
+            ),
           ],
         ),
       ),
     );
   }
 
-  Widget _signinText() {
+  Widget _signupText() {
     return Text(
-      "Sign In",
+      "Sign Up",
       style: TextStyle(
         color: Colors.white,
         fontWeight: FontWeight.bold,
         fontSize: 24,
       ),
+    );
+  }
+
+  Widget _usernameTextField() {
+    return TextFormField(
+      controller: _nameCon,
+      style: TextStyle(color: Colors.white),
+      decoration: InputDecoration(hintText: "Username"),
     );
   }
 
@@ -74,21 +90,22 @@ class SigninPage extends StatelessWidget {
     );
   }
 
-  Widget _signinButton(BuildContext context) {
+  Widget _signupButton(BuildContext context) {
     return ReactiveButton(
-      title: 'Sign In',
+      title: 'Sign Up',
       height: 50,
       activeColor: AppColors.primary,
-      onPressed: () {
-        return sl<SigninUseCase>().call(
-          params: SigninReqParams(
+      onPressed: () async {
+        await sl<SignupUseCase>().call(
+          params: SignupReqParams(
+            usersName: _nameCon.text,
             usersEmail: _emailCon.text,
             usersPassword: _passwordCon.text,
           ),
         );
       },
 
-      onSuccess: () async {
+      onSuccess: () {
         AppNavigation.pushNamedAndRemoveUntil(context, AppRoutes.homePage);
       },
 
@@ -98,27 +115,24 @@ class SigninPage extends StatelessWidget {
     );
   }
 
-  Widget _signupText(BuildContext context) {
+  Widget _signinText(BuildContext context) {
     return Text.rich(
       TextSpan(
         children: [
           TextSpan(
-            text: "Don't you have an account? ",
+            text: "Do you have an account? ",
             style: TextStyle(color: AppColors.grey),
           ),
 
           TextSpan(
-            text: "Sign Up",
+            text: "Sign In",
             style: TextStyle(
               color: AppColors.grey,
               fontWeight: FontWeight.bold,
             ),
             recognizer: TapGestureRecognizer()
               ..onTap = () {
-                AppNavigation.pushReplacementNamed(
-                  context,
-                  AppRoutes.signupPage,
-                );
+                AppNavigation.pushNamed(context, AppRoutes.signinPage);
               },
           ),
         ],

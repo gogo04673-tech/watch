@@ -5,8 +5,13 @@ import 'package:watch/core/configs/theme/app_theme.dart';
 import 'package:watch/presentation/splash/bloc/splash_cubit.dart';
 import 'package:watch/presentation/splash/pages/splash.dart';
 import 'package:watch/routes.dart';
+import 'package:watch/service_locator.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+
+  setupServiceLocator();
+
   runApp(const MyApp());
 }
 

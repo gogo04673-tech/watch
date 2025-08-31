@@ -4,4 +4,7 @@ class AppRoutes {
 
   // * ============> Signin Page Route <============ * //
   static const String signinPage = "/signinPage";
+
+  // * ============> Signup Page Route <============ * //
+  static const String signupPage = "/signupPage";
 }
