@@ -14,6 +14,17 @@ class AppTheme {
     //   bodySmall: TextStyle(color: Colors.white),
     // ),
 
+    // * ============> Appbar theme <============ * //
+    appBarTheme: AppBarTheme(
+      backgroundColor: AppColors.background,
+      centerTitle: true,
+      titleTextStyle: TextStyle(
+        color: AppColors.primary,
+        fontWeight: FontWeight.bold,
+        fontSize: 22,
+      ),
+    ),
+
     // * ============> This Input Text field theme <============ * //
     inputDecorationTheme: InputDecorationTheme(
       filled: true,

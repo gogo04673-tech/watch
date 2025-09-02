@@ -5,7 +5,7 @@ import 'package:watch/common/helper/messages/display_message.dart';
 import 'package:watch/common/helper/navigation/app_navigation.dart';
 import 'package:watch/core/configs/routes/app_routes.dart';
 import 'package:watch/core/configs/theme/app_colors.dart';
-import 'package:watch/data/models/auth/signup_req_params.dart';
+import 'package:watch/data/auth/models/signup_req_params.dart';
 import 'package:watch/domain/auth/usecases/signup.dart';
 import 'package:watch/service_locator.dart';
 

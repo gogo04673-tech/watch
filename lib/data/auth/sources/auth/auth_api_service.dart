@@ -2,8 +2,9 @@ import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
 import 'package:watch/core/constants/api_url.dart';
 import 'package:watch/core/network/dio_client.dart';
-import 'package:watch/data/models/auth/signin_req_params.dart';
-import 'package:watch/data/models/auth/signup_req_params.dart';
+import 'package:watch/data/auth/models/signin_req_params.dart';
+import 'package:watch/data/auth/models/signup_req_params.dart';
+
 import 'package:watch/service_locator.dart';
 
 abstract class AuthApiService {

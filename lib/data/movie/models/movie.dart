@@ -1,0 +1,61 @@
+class MovieModel {
+  MovieModel({
+    required this.adult,
+    required this.backdropPath,
+    required this.id,
+    required this.title,
+    required this.originalTitle,
+    required this.overview,
+    required this.posterPath,
+    required this.mediaType,
+    required this.originalLanguage,
+    required this.genreIds,
+    required this.popularity,
+    required this.releaseDate,
+    required this.video,
+    required this.voteAverage,
+    required this.voteCount,
+  });
+
+  final bool? adult;
+  final String? backdropPath;
+  final int? id;
+  final String? title;
+  final String? originalTitle;
+  final String? overview;
+  final String? posterPath;
+  final String? mediaType;
+  final String? originalLanguage;
+  final List<int> genreIds;
+  final double? popularity;
+  final DateTime? releaseDate;
+  final bool? video;
+  final double? voteAverage;
+  final int? voteCount;
+
+  factory MovieModel.fromJson(Map<String, dynamic> json) {
+    return MovieModel(
+      adult: json["adult"],
+      backdropPath: json["backdrop_path"],
+      id: json["id"],
+      title: json["title"],
+      originalTitle: json["original_title"],
+      overview: json["overview"],
+      posterPath: json["poster_path"],
+      mediaType: json["media_type"],
+      originalLanguage: json["original_language"],
+      genreIds: json["genre_ids"] == null
+          ? []
+          : List<int>.from(
+              json["genre_ids"].map(
+                (x) => x is int ? x : int.parse(x.toString()),
+              ),
+            ),
+      popularity: (json["popularity"] ?? 0).toDouble(),
+      releaseDate: DateTime.tryParse(json["release_date"] ?? ""),
+      video: json["video"],
+      voteAverage: (json["vote_average"] ?? 0).toDouble(),
+      voteCount: json["vote_count"] ?? 0,
+    );
+  }
+}
