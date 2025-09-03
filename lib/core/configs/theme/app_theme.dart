@@ -17,6 +17,7 @@ class AppTheme {
     // * ============> Appbar theme <============ * //
     appBarTheme: AppBarTheme(
       backgroundColor: AppColors.background,
+
       centerTitle: true,
       titleTextStyle: TextStyle(
         color: AppColors.primary,

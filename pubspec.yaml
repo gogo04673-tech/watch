@@ -44,6 +44,10 @@ dependencies:
   shared_preferences:
   fan_carousel_image_slider:
   lottie:
+  cached_network_image:
+  chewie:
+  video_player:
+  youtube_player_flutter:
 
 dev_dependencies:
   flutter_test:

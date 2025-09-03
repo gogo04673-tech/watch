@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:watch/presentation/home/widgets/trending.dart';
+import 'package:watch/presentation/home/widgets/category_text.dart';
+import 'package:watch/presentation/home/widgets/now_playings_movies.dart';
+import 'package:watch/presentation/home/widgets/popular_tv.dart';
+import 'package:watch/presentation/home/widgets/trending_movies.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
@@ -10,7 +13,23 @@ class HomePage extends StatelessWidget {
       // appbar is here
       appBar: AppBar(title: Text("Watch")),
       // body is here
-      body: SingleChildScrollView(child: Column(children: [TrendingMovies()])),
+      body: SingleChildScrollView(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            CategoryText(title: "Trending"),
+            TrendingMovies(),
+
+            CategoryText(title: "Now Playing"),
+            const SizedBox(height: 10),
+            NowPlayingMovies(),
+
+            CategoryText(title: "Popular Tv"),
+            const SizedBox(height: 10),
+            PopularTv(),
+          ],
+        ),
+      ),
     );
   }
 }

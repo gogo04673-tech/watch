@@ -32,7 +32,7 @@ class TrendingMovies extends StatelessWidget {
                   )
                   .toList(),
               isAssets: false,
-              autoPlay: true,
+              autoPlay: false,
               sliderHeight: 400,
               showIndicator: false,
             );

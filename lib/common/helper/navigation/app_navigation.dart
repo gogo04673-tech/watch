@@ -9,6 +9,10 @@ class AppNavigation {
     Navigator.of(context).pushNamed(route);
   }
 
+  static void push(BuildContext context, Widget widget) {
+    Navigator.of(context).push(MaterialPageRoute(builder: (context) => widget));
+  }
+
   static void pushNamedAndRemoveUntil(BuildContext context, String route) {
     Navigator.of(
       context,
