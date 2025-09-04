@@ -1,19 +1,21 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:watch/core/configs/assets/app_images.dart';
+import 'package:watch/common/helper/navigation/app_navigation.dart';
 import 'package:watch/core/configs/theme/app_colors.dart';
 import 'package:watch/core/functions/edit_title_cart.dart';
 import 'package:watch/domain/tv/entities/tv.dart';
+import 'package:watch/presentation/watch/page/tv_watch.dart';
 
 class TvCart extends StatelessWidget {
-  const TvCart({super.key, required this.onTapTv, required this.tv});
+  const TvCart({super.key, required this.tv});
   final TvEntity tv;
-  final void Function()? onTapTv;
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: onTapTv,
+      onTap: () {
+        AppNavigation.push(context, TvWatch(tvEntity: tv));
+      },
       child: Column(
         children: [
           Container(
@@ -39,7 +41,7 @@ class TvCart extends StatelessWidget {
               child: Hero(
                 tag: tv.id!,
                 child: CachedNetworkImage(
-                  imageUrl: AppImages.movieImageBasePath + tv.posterPath!,
+                  imageUrl: tv.providerPosterPath(),
                   height: 200,
                   fit: BoxFit.cover,
                 ),

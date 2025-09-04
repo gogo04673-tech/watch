@@ -1,16 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:watch/core/configs/theme/app_colors.dart';
-import 'package:watch/domain/movie/entities/movie.dart';
-import 'package:watch/presentation/watch/widgets/movie/recommendations_movies.dart';
+import 'package:watch/domain/tv/entities/tv.dart';
+import 'package:watch/presentation/watch/widgets/keywords.dart';
 import 'package:watch/presentation/watch/widgets/release_date_movie.dart';
-import 'package:watch/presentation/watch/widgets/movie/similar_movies.dart';
+import 'package:watch/presentation/watch/widgets/tv/recommendations_tv.dart';
+import 'package:watch/presentation/watch/widgets/tv/similar_tv.dart';
 import 'package:watch/presentation/watch/widgets/video_trailer.dart';
 import 'package:watch/presentation/watch/widgets/vote_average_movie.dart';
 import 'package:watch/presentation/watch/widgets/watch_title.dart';
 
-class MovieWatch extends StatelessWidget {
-  const MovieWatch({super.key, required this.movieEntity});
-  final MovieEntity movieEntity;
+class TvWatch extends StatelessWidget {
+  const TvWatch({super.key, required this.tvEntity});
+  final TvEntity tvEntity;
 
   @override
   Widget build(BuildContext context) {
@@ -24,16 +25,19 @@ class MovieWatch extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            VideoTrailer(movieId: movieEntity.id!),
-            WatchTitle(title: movieEntity.title!),
+            VideoTrailer(movieId: tvEntity.id!),
+            WatchTitle(title: tvEntity.name!),
+
+            //
+            Keywords(tvId: tvEntity.id!),
 
             //
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                ReleaseDateMovie(data: movieEntity.releaseDate.toString()),
+                ReleaseDateMovie(data: tvEntity.firstAirDate.toString()),
                 VoteAverageMovie(
-                  voteAverage: movieEntity.voteAverage!.toStringAsFixed(1),
+                  voteAverage: tvEntity.voteAverage!.toStringAsFixed(1),
                 ),
               ],
             ),
@@ -41,7 +45,7 @@ class MovieWatch extends StatelessWidget {
             //
             WatchTitle(title: "Overview"),
             Text(
-              movieEntity.overview!,
+              tvEntity.overview!,
               style: Theme.of(
                 context,
               ).textTheme.bodyMedium!.copyWith(color: AppColors.grey),
@@ -49,10 +53,10 @@ class MovieWatch extends StatelessWidget {
 
             //
             WatchTitle(title: "Recommendation"),
-            RecommendationsMovies(movieId: movieEntity.id!),
+            RecommendationsTv(tvId: tvEntity.id!),
 
             WatchTitle(title: "Similar"),
-            SimilarMovies(movieId: movieEntity.id!),
+            SimilarTv(tvId: tvEntity.id!),
           ],
         ),
       ),

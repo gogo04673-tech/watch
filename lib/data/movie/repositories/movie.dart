@@ -1,6 +1,6 @@
 import 'package:dartz/dartz.dart';
-import 'package:watch/common/helper/mapper/movie_mapper.dart';
-import 'package:watch/common/helper/mapper/trailer_mapper.dart';
+import 'package:watch/common/helper/mapper/movie.dart';
+import 'package:watch/common/helper/mapper/trailer.dart';
 import 'package:watch/core/models/trailer.dart';
 import 'package:watch/data/movie/models/movie.dart';
 import 'package:watch/data/movie/sources/movie_service.dart';
@@ -94,6 +94,23 @@ class MovieRepositoryImpl extends MovieRepository {
             .map((movie) => MovieMapper.toEntity(MovieModel.fromJson(movie)))
             .toList();
         return Right(recommendation);
+      },
+    );
+  }
+
+  @override
+  Future<Either<String, dynamic>> searchMovie(String query) async {
+    var data = await sl<MovieService>().searchMovie(query);
+
+    return data.fold(
+      (error) {
+        return Left(error);
+      },
+      (data) {
+        var searchMovie = List.from(data['data'])
+            .map((movie) => MovieMapper.toEntity(MovieModel.fromJson(movie)))
+            .toList();
+        return Right(searchMovie);
       },
     );
   }

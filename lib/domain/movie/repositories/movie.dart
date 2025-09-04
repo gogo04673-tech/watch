@@ -10,4 +10,6 @@ abstract class MovieRepository {
   Future<Either<String, dynamic>> getRecommendationMovies(int movieId);
 
   Future<Either<String, dynamic>> getSimilarMovies(int movieId);
+
+  Future<Either<String, dynamic>> searchMovie(String query);
 }

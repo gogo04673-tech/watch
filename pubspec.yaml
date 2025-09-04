@@ -47,7 +47,8 @@ dependencies:
   cached_network_image:
   chewie:
   video_player:
-  youtube_player_flutter:
+
+  youtube_player_iframe: ^5.2.2
 
 dev_dependencies:
   flutter_test:

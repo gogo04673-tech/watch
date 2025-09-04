@@ -1,5 +1,5 @@
 import 'package:equatable/equatable.dart';
-import 'package:youtube_player_flutter/youtube_player_flutter.dart';
+import 'package:youtube_player_iframe/youtube_player_iframe.dart';
 
 abstract class TrailerState extends Equatable {
   @override

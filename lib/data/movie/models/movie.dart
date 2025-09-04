@@ -52,10 +52,27 @@ class MovieModel {
               ),
             ),
       popularity: (json["popularity"] ?? 0).toDouble(),
-      releaseDate: DateTime.tryParse(json["release_date"] ?? ""),
+      // releaseDate: DateTime.tryParse(json["release_date"] ?? ""),
+      releaseDate: _parseDate(json["release_date"]),
       video: json["video"],
       voteAverage: (json["vote_average"] ?? 0).toDouble(),
       voteCount: json["vote_count"] ?? 0,
     );
+  }
+
+  static DateTime? _parseDate(dynamic date) {
+    if (date == null) return null;
+
+    final dateStr = date.toString().trim();
+
+    if (dateStr.isEmpty || dateStr == "0000-00-00") {
+      return null;
+    }
+
+    try {
+      return DateTime.parse(dateStr);
+    } catch (_) {
+      return null; // أو تضع قيمة افتراضية مثل DateTime(1970,1,1)
+    }
   }
 }

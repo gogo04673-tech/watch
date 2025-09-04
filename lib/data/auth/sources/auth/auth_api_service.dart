@@ -23,7 +23,7 @@ class AuthApiServiceImpl extends AuthApiService {
         data: params.toJson(),
       );
 
-      return Right(response.data as Map<String, dynamic>);
+      return Right(response.data);
     } on DioException catch (e) {
       final errorMsg =
           e.response?.data?['message'] ?? e.message ?? "Unknown error";
@@ -43,7 +43,7 @@ class AuthApiServiceImpl extends AuthApiService {
         data: params.toJson(),
       );
 
-      return Right(response.data as Map<String, dynamic>);
+      return Right(response.data);
     } on DioException catch (e) {
       final errorMsg =
           e.response?.data?['message'] ?? e.message ?? "Unknown error";

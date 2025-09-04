@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:watch/common/bloc/generic_data_cubit.dart';
+import 'package:watch/common/bloc/generic_data_state.dart';
 import 'package:watch/common/widgets/tv/tv_cart.dart';
 import 'package:watch/domain/tv/entities/tv.dart';
-import 'package:watch/presentation/home/bloc/popular_tv_cubit.dart';
-import 'package:watch/presentation/home/bloc/popular_tv_state.dart';
+import 'package:watch/domain/tv/usecases/get_popular_tv.dart';
+
+import 'package:watch/service_locator.dart';
 
 class PopularTv extends StatelessWidget {
   const PopularTv({super.key});
@@ -11,30 +14,32 @@ class PopularTv extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (create) => PopularTvCubit()..getPopularTv(),
-      child: BlocBuilder<PopularTvCubit, PopularTvState>(
+      create: (create) =>
+          GenericDataCubit()
+            ..getData<List<TvEntity>>(sl<GetPopularTvUseCase>()),
+      child: BlocBuilder<GenericDataCubit, GenericDataState>(
         builder: (context, state) {
-          if (state is PopularTvStateLoading) {
+          if (state is DataLoading) {
             return Center(child: CircularProgressIndicator());
           }
 
-          if (state is PopularTvFailureLoad) {
+          if (state is DataFailureLoad) {
             return Center(child: Text("Error: ${state.errorMessage}"));
           }
 
-          if (state is PopularTvStateLoaded) {
+          if (state is DataLoaded) {
             return Container(
               height: 250,
               margin: const EdgeInsets.only(left: 10),
               child: ListView.separated(
                 itemBuilder: (context, i) {
-                  TvEntity tv = state.tv[i];
-                  return TvCart(tv: tv, onTapTv: () {});
+                  TvEntity tv = state.data[i];
+                  return TvCart(tv: tv);
                 },
                 separatorBuilder: (context, index) => SizedBox(width: 10),
                 shrinkWrap: true,
                 scrollDirection: Axis.horizontal,
-                itemCount: state.tv.length,
+                itemCount: state.data.length,
               ),
             );
           }

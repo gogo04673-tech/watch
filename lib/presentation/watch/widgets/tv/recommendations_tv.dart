@@ -2,20 +2,23 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:watch/common/bloc/generic_data_cubit.dart';
 import 'package:watch/common/bloc/generic_data_state.dart';
-import 'package:watch/common/widgets/movie/movie_cart.dart';
-import 'package:watch/domain/movie/entities/movie.dart';
-import 'package:watch/domain/movie/usecases/get_now_playing_movies.dart';
+import 'package:watch/common/widgets/tv/tv_cart.dart';
+import 'package:watch/domain/tv/entities/tv.dart';
+import 'package:watch/domain/tv/usecases/ger_recommendations_tv.dart';
 import 'package:watch/service_locator.dart';
 
-class NowPlayingMovies extends StatelessWidget {
-  const NowPlayingMovies({super.key});
+class RecommendationsTv extends StatelessWidget {
+  const RecommendationsTv({super.key, required this.tvId});
 
+  final int tvId;
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (create) =>
-          GenericDataCubit()
-            ..getData<List<MovieEntity>>(sl<GetNowPlayingMoviesUseCase>()),
+      create: (create) => GenericDataCubit()
+        ..getData<List<TvEntity>>(
+          sl<GetRecommendationsTvUseCase>(),
+          params: tvId,
+        ),
       child: BlocBuilder<GenericDataCubit, GenericDataState>(
         builder: (context, state) {
           if (state is DataLoading) {
@@ -32,8 +35,8 @@ class NowPlayingMovies extends StatelessWidget {
               margin: const EdgeInsets.only(left: 10),
               child: ListView.separated(
                 itemBuilder: (context, i) {
-                  MovieEntity movie = state.data[i];
-                  return MovieCart(movie: movie);
+                  TvEntity tv = state.data[i];
+                  return TvCart(tv: tv);
                 },
                 separatorBuilder: (context, index) => SizedBox(width: 10),
                 shrinkWrap: true,
@@ -42,6 +45,7 @@ class NowPlayingMovies extends StatelessWidget {
               ),
             );
           }
+
           return Center(child: Text("No things happens"));
         },
       ),

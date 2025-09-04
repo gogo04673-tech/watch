@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:watch/presentation/watch/bloc/trailer_cubit.dart';
 import 'package:watch/presentation/watch/bloc/trailer_state.dart';
-import 'package:youtube_player_flutter/youtube_player_flutter.dart';
+import 'package:youtube_player_iframe/youtube_player_iframe.dart';
 
 class VideoTrailer extends StatelessWidget {
   final int movieId;
@@ -29,7 +29,7 @@ class VideoTrailer extends StatelessWidget {
               borderRadius: BorderRadius.circular(8.0),
               child: YoutubePlayer(
                 controller: state.youtubePlayerController,
-                showVideoProgressIndicator: true,
+                aspectRatio: 16 / 9,
               ),
             );
           }

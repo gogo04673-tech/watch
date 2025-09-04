@@ -1,7 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:watch/common/helper/navigation/app_navigation.dart';
-import 'package:watch/core/configs/assets/app_images.dart';
 import 'package:watch/core/configs/theme/app_colors.dart';
 import 'package:watch/core/functions/edit_title_cart.dart';
 import 'package:watch/domain/movie/entities/movie.dart';
@@ -42,7 +41,7 @@ class MovieCart extends StatelessWidget {
               child: Hero(
                 tag: movie.id!,
                 child: CachedNetworkImage(
-                  imageUrl: AppImages.movieImageBasePath + movie.posterPath!,
+                  imageUrl: movie.providerPosterPath(),
                   height: 200,
                   fit: BoxFit.cover,
                 ),

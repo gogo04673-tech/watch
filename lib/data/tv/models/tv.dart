@@ -49,7 +49,7 @@ class TvModel {
       posterPath: json["poster_path"],
       firstAirDate: DateTime.tryParse(json["first_air_date"] ?? ""),
       name: json["name"],
-      voteAverage: json["vote_average"],
+      voteAverage: double.tryParse(json["vote_average"].toString()),
       voteCount: json["vote_count"],
     );
   }

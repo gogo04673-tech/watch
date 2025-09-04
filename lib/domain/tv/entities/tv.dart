@@ -1,3 +1,5 @@
+import 'package:watch/core/configs/assets/app_images.dart';
+
 class TvEntity {
   TvEntity({
     required this.adult,
@@ -30,4 +32,10 @@ class TvEntity {
   final String? name;
   final double? voteAverage;
   final int? voteCount;
+
+  String providerPosterPath() {
+    return posterPath != null
+        ? AppImages.movieImageBasePath + posterPath!
+        : AppImages.defaultImage;
+  }
 }

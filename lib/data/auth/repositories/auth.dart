@@ -46,6 +46,10 @@ class AuthRepositoryImpl extends AuthRepository {
   ) async {
     var result = await sl<AuthApiService>().signup(params);
 
+    //     print("""
+    // ====> res: $result
+    // """);
+
     if (result.isLeft()) {
       return result;
     }

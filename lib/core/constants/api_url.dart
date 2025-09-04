@@ -13,8 +13,12 @@ class ApiUrl {
   static const String moviesTrailer = "movie/trailer.php";
   static const String moviesRecommendation = "movie/recommendation.php";
   static const String moviesSimilar = "movie/similar.php";
+  static const String moviesSearch = "movie/search.php";
 
   // * ======================> Tv URL <====================== * //
   static const String tvPopular = "tv/popular_tv.php";
-  // static const String moviesNowPlaying = "movie/now_playing.php";
+  static const String tvRecommendations = "tv/recommendations.php";
+  static const String tvSimilar = "tv/similar.php";
+  static const String tvKeywords = "tv/keywords.php";
+  static const String tvSearch = "tv/search.php";
 }
